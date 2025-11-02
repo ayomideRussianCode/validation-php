@@ -12,5 +12,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }else{
         $username = htmlspecialchars(trim($_POST['username']));
     }
-    echo $username;
+    if(empty($_POST['email'])){
+        $emailError = "Email is required";
+    } else {
+        $email = htmlspecialchars(trim($_POST['email']));
+
+        //check for correct email using filter_var and filter_validate_email
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $emailError = "Invalid email format";
+        }
+    }
 }
